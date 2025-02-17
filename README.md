@@ -22,10 +22,10 @@ This repository contains a Docker Compose setup for running a simple microservic
 
 ### Build and start the services with Docker Compose:
 
-  docker-compose up --build
+  docker compose up --build
 
 ### Once all services (containers) are running, you can test if the services are working properly by running the following command locally:
 
   bash <(curl -s https://raw.githubusercontent.com/kkenan/basic-microservices/master/health_check.sh)
 
-### If everything is set up correctly, you should see the output: All checks passed. Congrats!
+#### If everything is set up correctly, you should see the output: All checks passed. Congrats!
