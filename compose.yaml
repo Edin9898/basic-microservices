@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:10
+    environment:
+      POSTGRES_DB: demodb
+      POSTGRES_USER: demouser
+      POSTGRES_PASSWORD: DemoPa$$
+    ports:
+      - "5432:5432"
+
+  node-app:
+    build:
+      context: ./node-app
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+
+  spring-boot-app:
+    build:
+      context: ./spring-boot-app
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - node-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demodb
+      SPRING_DATASOURCE_USERNAME: demouser
+      SPRING_DATASOURCE_PASSWORD: DemoPa$$
+      app.node.url: http://node-app:8081/
+    ports:
+      - "8080:8080"
